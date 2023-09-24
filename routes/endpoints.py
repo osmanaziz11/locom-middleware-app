@@ -10,6 +10,10 @@ def error_response(status_code, error_message):
     return jsonify({"status": status_code, "error": error_message})
 
 
+def success_response(status_code, api_response):
+    return jsonify({"status": status_code, "response": api_response})
+
+
 @app.route("/", methods=['GET'])
 def index():
     return "Endpoints: Server is running."
@@ -24,7 +28,7 @@ def view_numbers(country_code):
         if isinstance(response, str):
             return error_response(401, "Authentication is required, and the provided credentials are invalid or missing.")
         elif isinstance(response, dict):
-            return jsonify({"status": 200, "response": response})
+            return success_response(200, response)
         else:
             return error_response(502, "Invalid request")
     except Exception as exe:
@@ -41,9 +45,9 @@ def buy_number():
             if response['error-code'] == 200:
                 response = vonage_manager.update_number(request.json)
             if response['error-code'] == 200:
-                return jsonify({"status": 200, "response": response})
+                return success_response(200, response)
             else:
-                return error_response(401, "Error Updating Number")
+                return error_response(401, response)
         else:
             return error_response(420, "You are required to complete the sender ID registration process.")
     except Exception as exe:
