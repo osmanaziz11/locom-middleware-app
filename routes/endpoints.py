@@ -36,16 +36,15 @@ def buy_number():
     try:
         vonage_manager = VonageManager()
         response = vonage_manager.buy_number(request.json)
-        print("Error Handler")
-        print(response['error-code'])
-        # if isinstance(response, dict):
-        #     if response['error-code'] == 200:
-        #         response = vonage_manager.update_number(request.json)
-        #     if response['error-code'] == 200:
-        #         return jsonify({"status": 200, "response": response})
-        #     else:
-        #         return error_response(401, "Error Updating Number")
-        # else:
-        return error_response(401, "Error purchasing number.")
+
+        if isinstance(response, dict):
+            if response['error-code'] == 200:
+                response = vonage_manager.update_number(request.json)
+            if response['error-code'] == 200:
+                return jsonify({"status": 200, "response": response})
+            else:
+                return error_response(401, "Error Updating Number")
+        else:
+            return error_response(420, "You are required to complete the sender ID registration process.")
     except Exception as exe:
         return error_response(500, exe)
