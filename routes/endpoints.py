@@ -40,6 +40,9 @@ def buy_number():
     try:
         vonage_manager = VonageManager()
         response = vonage_manager.buy_number(request.json)
+        print("New Error")
+        print(type(response))
+        print(response)
 
         if isinstance(response, dict):
             if response['error-code'] == 200:
