@@ -1,9 +1,9 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint
 
 # Create a Blueprint instance
 app = Blueprint('api', __name__)
 
 
-@app.route("/api/", methods=['GET'])
+@app.route("/", methods=['GET'])
 def index():
-    return "API: Server is running."
+    return "Endpoints: Server is running."

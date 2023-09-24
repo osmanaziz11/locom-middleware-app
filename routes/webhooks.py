@@ -1,9 +1,9 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint
 
 # Create a Blueprint instance
-app = Blueprint('api', __name__)
+app = Blueprint('webhook', __name__)
 
 
 @app.route("/webhook/", methods=['GET'])
 def index():
-    return "Webhook: Server is running."
+    return "Webhooks: Server is running."
