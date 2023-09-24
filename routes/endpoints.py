@@ -37,8 +37,15 @@ def buy_number():
         vonage_manager = VonageManager()
         response = vonage_manager.buy_number(request.json)
         print("Error Handler")
-        print(response)
-
+        print(response['error-code'])
+        # if isinstance(response, dict):
+        #     if response['error-code'] == 200:
+        #         response = vonage_manager.update_number(request.json)
+        #     if response['error-code'] == 200:
+        #         return jsonify({"status": 200, "response": response})
+        #     else:
+        #         return error_response(401, "Error Updating Number")
+        # else:
         return error_response(401, "Error purchasing number.")
     except Exception as exe:
         return error_response(500, exe)
