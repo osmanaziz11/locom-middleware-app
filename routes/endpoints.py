@@ -16,8 +16,9 @@ def view_numbers(country_code):
         vonage_manager = VonageManager()
         response = vonage_manager.get_available_numbers(country_code)
         if isinstance(response, str):
-            return jsonify({"status": 500, "error": response})
-        print(response)
-        return jsonify({"status": 200, "response": response})
+            return jsonify({"status": 400, "response": "Invalid response object from Vonage"})
+        if isinstance(response, dict):
+            return jsonify({"status": 200, "response": response})
+        return jsonify({"status": 400, "response": "nvalid response object from Vonage"})
     except Exception as exe:
         return jsonify({"status": 500, "error": exe})
