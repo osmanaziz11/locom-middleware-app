@@ -1,15 +1,12 @@
-import json
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, jsonify
 from util.helper import VonageManager
-# Create a Blueprint instance
+
 app = Blueprint('api', __name__)
 
 
 @app.route("/", methods=['GET'])
 def index():
     return "Endpoints: Server is running."
-
-# country code should be in capital letters
 
 
 @app.route("/api/numbers/<country_code>", methods=['GET'])
