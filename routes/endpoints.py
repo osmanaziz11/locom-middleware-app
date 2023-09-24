@@ -39,21 +39,15 @@ def view_numbers(country_code):
 def buy_number():
     try:
         vonage_manager = VonageManager()
-        # response = vonage_manager.buy_number(request.json)
-        # print("New Error")
-        # print(type(response))
-        # print(response)
-        # return success_response(200, response)
+        response = vonage_manager.buy_number(request.json)
 
-        # if isinstance(response, dict):
-        #     if response['error-code'] == 200:
-        updateResp = vonage_manager.update_number(request.json)
-
-        if updateResp['error-code'] == '200':
-            return success_response(200, updateResp)
-        #     else:
-        #         return error_response(401, updateResp)
+        if isinstance(response, dict) and response.get('error-code') == '200':
+            update_response = vonage_manager.update_number(request.json)
+            if isinstance(update_response, dict) and update_response.get('error-code') == '200':
+                return success_response(200, update_response)
+            else:
+                return error_response(401, "Error Updating Number")
         else:
-            return error_response(420, updateResp)
+            return error_response(401, "Error purchasing number.")
     except Exception as exe:
         return error_response(500, exe)
