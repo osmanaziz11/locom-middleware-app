@@ -39,20 +39,20 @@ def view_numbers(country_code):
 def buy_number():
     try:
         vonage_manager = VonageManager()
-        response = vonage_manager.buy_number(request.json)
-        print("New Error")
-        print(type(response))
-        print(response)
-        return success_response(200, response)
+        # response = vonage_manager.buy_number(request.json)
+        # print("New Error")
+        # print(type(response))
+        # print(response)
+        # return success_response(200, response)
 
         # if isinstance(response, dict):
         #     if response['error-code'] == 200:
-        #         updateResp = vonage_manager.update_number(request.json)
-        #     if updateResp['error-code'] == 200:
-        #         return success_response(200, updateResp)
+        updateResp = vonage_manager.update_number(request.json)
+        if updateResp['error-code'] == 200:
+            return success_response(200, updateResp)
         #     else:
         #         return error_response(401, updateResp)
-        # else:
-        #     return error_response(420, "You are required to complete the sender ID registration process.")
+        else:
+            return error_response(420, updateResp)
     except Exception as exe:
         return error_response(500, exe)
