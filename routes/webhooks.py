@@ -1,6 +1,5 @@
 from flask import Blueprint
 
-# Create a Blueprint instance
 app = Blueprint('webhook', __name__)
 
 
