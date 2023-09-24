@@ -39,13 +39,6 @@ def buy_number():
         print("Error Handler")
         print(response)
 
-        if response['error-code'] == 200:
-            response = vonage_manager.update_number(request.json)
-            if response['error-code'] == 200:
-                return jsonify({"status": 200, "response": response})
-            else:
-                return error_response(401, "Error Updating Number")
-        else:
-            return error_response(401, "Error purchasing number.")
+        return error_response(401, "Error purchasing number.")
     except Exception as exe:
         return error_response(500, exe)
