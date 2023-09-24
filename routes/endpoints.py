@@ -48,9 +48,8 @@ def buy_number():
         # if isinstance(response, dict):
         #     if response['error-code'] == 200:
         updateResp = vonage_manager.update_number(request.json)
-        print(updateResp)
-        print(type(updateResp))
-        if updateResp['error-code'] == 200:
+
+        if updateResp['error-code'] == '200':
             return success_response(200, updateResp)
         #     else:
         #         return error_response(401, updateResp)
