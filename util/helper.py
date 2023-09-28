@@ -47,3 +47,21 @@ class VonageManager:
             return response
         except Exception as exc:
             return exc
+
+    def verify_number(self, number):
+        try:
+            
+           client = vonage.Client(
+                application_id=os.environ.get('VONAGE_APP_ID'),
+                private_key=os.environ.get('VONAGE_PRIVATE_KEY'),
+                )
+           params = {
+                'brand': "Locom AI",
+                'workflow': [
+                    {'channel': 'sms', 'to': number},
+                        ],
+                }
+
+           return client.verify2.new_request(params)
+        except Exception as exc:
+            return exc

@@ -51,3 +51,14 @@ def buy_number():
             return error_response(401, "Error purchasing number.")
     except Exception as exe:
         return error_response(500, exe)
+
+@app.route("/api/verify/<number>", methods=['GET'])
+def buy_number(number):
+    try:
+        vonage_manager = VonageManager()
+        response = vonage_manager.verify_number(number)
+
+        print(response)
+        return error_response(401, "Error purchasing number.")
+    except Exception as exe:
+        return error_response(500, exe)

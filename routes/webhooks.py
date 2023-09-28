@@ -27,3 +27,14 @@ def inbound_sms():
         print(data)
 
     return ('', 204)
+
+@app.route("/webhook/verify", methods=['GET', 'POST'])
+def verify_number():
+    print("asa")
+    if request.is_json:
+        print(request.get_json())
+    else:
+        data = dict(request.form) or dict(request.args)
+        print(data)
+
+    return ('', 204)
