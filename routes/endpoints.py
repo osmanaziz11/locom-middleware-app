@@ -65,7 +65,7 @@ def verify_number(number):
         return error_response(500, exe)
 
 @app.route("/api/verify-check/<req_id>/<code>", methods=['GET'])
-def verify_number(req_id,code):
+def verify_check(req_id,code):
     try:
         vonage_manager = VonageManager()
         response = vonage_manager.verify_check(req_id,code)
