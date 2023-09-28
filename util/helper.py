@@ -50,15 +50,22 @@ class VonageManager:
 
     def verify_number(self, number):
         try:
-            
           verify = vonage.Verify(self.client)
-
-          response = verify.start_verification(number="923350591654", brand="Locom")
-
+          response = verify.start_verification(number=number, brand="Locom AI")
           if response["status"] == "0":
-            print("Started verification request_id is %s" % (response["request_id"]))
+            return response["request_id"]
           else:
-            print("Error: %s" % response["error_text"])
-          return ""
+           return ""
         except Exception as exc:
-            return exc
+            return ""
+
+    def verify_check(self, request_id,code):
+        try:
+          verify = vonage.Verify(self.client)
+          response = verify.check(request_id=request_id, code=code)
+          if response["status"] == "0":
+            return response["event_id"]
+          else:
+           return ""
+        except Exception as exc:
+            return ""

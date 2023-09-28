@@ -57,8 +57,21 @@ def verify_number(number):
     try:
         vonage_manager = VonageManager()
         response = vonage_manager.verify_number(number)
+        if response != '':
+            return success_response(200,response)
+        else:
+            return error_response(401, "Error verification request.")
+    except Exception as exe:
+        return error_response(500, exe)
 
-        print(response)
-        return error_response(401, "Error purchasing number.")
+@app.route("/api/verify-check/<req_id>/<code>", methods=['GET'])
+def verify_number(req_id,code):
+    try:
+        vonage_manager = VonageManager()
+        response = vonage_manager.verify_check(req_id,code)
+        if response != '':
+            return success_response(200,"Verified number")
+        else:
+            return error_response(401, "Invalid code")
     except Exception as exe:
         return error_response(500, exe)
