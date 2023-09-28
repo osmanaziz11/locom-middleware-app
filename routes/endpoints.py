@@ -53,7 +53,7 @@ def buy_number():
         return error_response(500, exe)
 
 @app.route("/api/verify/<number>", methods=['GET'])
-def buy_number(number):
+def verify_number(number):
     try:
         vonage_manager = VonageManager()
         response = vonage_manager.verify_number(number)
