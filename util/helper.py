@@ -53,7 +53,7 @@ class VonageManager:
             
            client = vonage.Client(
                 application_id=os.environ.get('VONAGE_APP_ID'),
-                private_key=os.environ.get('VONAGE_PRIVATE_KEY'),
+                private_key="../key.txt",
                 )
            params = {
                 'brand': "Locom AI",
