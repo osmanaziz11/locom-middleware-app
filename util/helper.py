@@ -52,7 +52,7 @@ class VonageManager:
         try:
             
            client = vonage.Client(
-                application_id=os.environ.get('VONAGE_APP_ID'),
+                application_id="5a0fdc41-15e5-4b1b-b669-8f010afa2e75",
                 private_key="./key.txt",
                 )
            params = {
