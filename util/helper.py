@@ -51,17 +51,14 @@ class VonageManager:
     def verify_number(self, number):
         try:
             
-           client = vonage.Client(
-                application_id="5a0fdc41-15e5-4b1b-b669-8f010afa2e75",
-                private_key="./key.txt",
-                )
-           params = {
-                'brand': "Locom AI",
-                'workflow': [
-                    {'channel': 'sms', 'to': number},
-                        ],
-                }
+          verify = vonage.Verify(self.client)
 
-           return client.verify2.new_request(params)
+          response = verify.start_verification(number="923350591654", brand="Locom")
+
+          if response["status"] == "0":
+            print("Started verification request_id is %s" % (response["request_id"]))
+          else:
+            print("Error: %s" % response["error_text"])
+          return ""
         except Exception as exc:
             return exc
