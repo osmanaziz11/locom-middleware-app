@@ -9,7 +9,7 @@ def index():
 
 
 @app.route("/webhook/answer", methods=['GET', 'POST'])
-def index():
+def abc():
     print(request.json)
     return jsonify([
         {
