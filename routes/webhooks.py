@@ -8,33 +8,13 @@ def index():
     return "Webhooks: Server is running."
 
 
-@app.route("/webhook/sms-status", methods=['POST'])
-def sms_status():
-    try:
-        print("SMS status URL Response: ", request.json)
-        return jsonify({})
-    except Exception as exe:
-        return jsonify({"status": 500, "error": exe})
-
-
-@app.route("/webhook/inbound-sms", methods=['GET', 'POST'])
-def inbound_sms():
-    print("asa")
-    if request.is_json:
-        print(request.get_json())
-    else:
-        data = dict(request.form) or dict(request.args)
-        print(data)
-
-    return ('', 204)
-
-@app.route("/webhook/verify", methods=['GET', 'POST'])
-def verify_number():
-    print("asa")
-    if request.is_json:
-        print(request.get_json())
-    else:
-        data = dict(request.form) or dict(request.args)
-        print(data)
-
-    return ('', 204)
+@app.route("/webhook/answer", methods=['GET', 'POST'])
+def index():
+    print(request.json)
+    return jsonify([
+        {
+            "action": "talk",
+            "text": "Hello from voange"
+        }
+    ]
+    )
