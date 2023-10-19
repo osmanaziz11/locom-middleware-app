@@ -20,6 +20,6 @@ def view_numbers(country_code):
             return make_response(response, 401)  # 401 for Unauthorized
         else:
             # If it's a successful response, return it with the 200 status code
-            return make_response(str(response), 200)
+            return make_response(response, 200)
     except Exception as exe:
         return make_response(str(exe), 500)  # 500 for Internal Server Error
