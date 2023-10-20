@@ -30,3 +30,21 @@ class TwilioManager:
 
     def sendMessage(self, sender, to, message):
         return True
+
+    def verify_number(self, number):
+        try:
+            verification = self.client.verify.v2.services(os.environ.get(
+                'VERIFY_SERVICE_ID')).verifications.create(to=number, channel='sms')
+            return verification.status
+        except TwilioException as exc:
+            error_message = str(exc)
+            return error_message
+
+    def verify_otp(self, number, code):
+        try:
+            verification = self.client.verify.v2.services(os.environ.get(
+                'VERIFY_SERVICE_ID')).verification_checks.create(to=number, code=code)
+            return verification.status
+        except TwilioException as exc:
+            error_message = str(exc)
+            return error_message
