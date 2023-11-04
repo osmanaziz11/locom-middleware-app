@@ -27,7 +27,7 @@ def view_numbers(country_code):
 
 
 @app.route("/api/purchase-number/<phone_number>", methods=['GET'])
-def view_numbers(phone_number):
+def number_purchase(phone_number):
     try:
         twilio_manager = TwilioManager()
         response = twilio_manager.purchase_number(phone_number)
