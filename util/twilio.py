@@ -4,9 +4,7 @@ from twilio.rest import Client
 from dotenv import load_dotenv
 from twilio.base.exceptions import TwilioException
 
-
 load_dotenv()
-
 
 class TwilioManager:
     def __init__(self):
@@ -28,6 +26,18 @@ class TwilioManager:
             error_message = str(exc)
             return error_message
 
+     def purchase_number(self, phone_number):
+        try:
+            twilio_response = self.client.incoming_phone_numbers.create(
+            phone_number=phone_number,
+            )
+            print(twilio_response.phone_number)
+            return twilio_response.phone_number
+
+        except TwilioException as exc:
+            error_message = str(exc)
+            return error_message
+        
     def sendMessage(self, sender, to, message):
         return True
 
