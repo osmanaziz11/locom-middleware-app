@@ -46,7 +46,11 @@ def verify_number(number):
     try:
         twilio_manager = TwilioManager()
         response = twilio_manager.verify_number(number)
-        return make_response(str(response), 200)
+        if isinstance(response, str):
+            return make_response(response, 401)  # 401 for Unauthorized
+        else:
+            # If it's a successful response, return it with the 200 status code
+            return make_response(response.status, 200)
     except Exception as exe:
         return make_response(str(exe), 500)  # 500 for Internal Server Error
 
@@ -56,21 +60,10 @@ def verify_otp(number, code):
     try:
         twilio_manager = TwilioManager()
         response = twilio_manager.verify_otp(number, code)
-        return make_response(str(response), 200)
+        if isinstance(response, str):
+            return make_response(response, 401)  # 401 for Unauthorized
+        else:
+            # If it's a successful response, return it with the 200 status code
+            return make_response(response.status, 200)
     except Exception as exe:
         return make_response(str(exe), 500)  # 500 for Internal Server Error
-
-#### Agent Routes ####
-
-
-# @app.route("/api/agent/ask", methods=['POST'])
-# def agent_ask():
-#     try:
-#         payload = request.json
-#         agent = Agent(payload)
-#         response = agent.ask(payload)
-#         if response == None:
-#             return make_response("Unable to respond", 500)
-#         return make_response(response, 200)
-#     except Exception as exe:
-#         return make_response(str(exe), 500)  # 500 for Internal Server Error
