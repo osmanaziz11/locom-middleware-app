@@ -30,10 +30,10 @@ class TwilioManager:
         try:
             twilio_response = self.client.incoming_phone_numbers.create(
             phone_number=phone_number,
+            voice_url=os.environ.get('VOICE_URL'),
+            sms_url=os.environ.get('SMS_URL')
             )
-            print(twilio_response.phone_number)
-            return twilio_response.phone_number
-
+            return twilio_response
         except TwilioException as exc:
             error_message = str(exc)
             return error_message
