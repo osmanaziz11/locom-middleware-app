@@ -26,7 +26,7 @@ class TwilioManager:
             error_message = str(exc)
             return error_message
 
-     def purchase_number(self, phone_number):
+    def purchase_number(self, phone_number):
         try:
             twilio_response = self.client.incoming_phone_numbers.create(
             phone_number=phone_number,
